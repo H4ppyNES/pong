@@ -245,7 +245,7 @@ let redPaddle = sprites.create(img`
 redPaddle.setPosition(152, 60)
 redPaddle.setVelocity(0, 50)
 redPaddle.setBounceOnWall(true)
-let redGoal = sprites.create(img`
+let redGoal2 = sprites.create(img`
     1111
     1111
     1111
@@ -367,8 +367,8 @@ let redGoal = sprites.create(img`
     1111
     1111
     `, SpriteKind.redGoal)
-redGoal.x = 0
-let blueGoal = sprites.create(img`
+redGoal2.x = 0
+let blueGoal2 = sprites.create(img`
     1111
     1111
     1111
@@ -490,5 +490,5 @@ let blueGoal = sprites.create(img`
     1111
     1111
     `, SpriteKind.blueGoal)
-blueGoal.x = 160
+blueGoal2.x = 160
 createBall()
