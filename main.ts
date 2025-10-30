@@ -2,7 +2,14 @@ namespace SpriteKind {
     export const Blue = SpriteKind.create()
     export const Red = SpriteKind.create()
     export const Ball = SpriteKind.create()
+    export const redGoal = SpriteKind.create()
+    export const blueGoal = SpriteKind.create()
 }
+sprites.onOverlap(SpriteKind.redGoal, SpriteKind.Ball, function (sprite, otherSprite) {
+    info.player2.changeScoreBy(1)
+    otherSprite.vx = otherSprite.vx * -1
+    pause(500)
+})
 function createBall () {
     ballSprite = sprites.create(img`
         . . . . . . . . . . . . . . . . . 
@@ -26,14 +33,12 @@ function createBall () {
     ballSprite.setVelocity(50, 50)
     ballSprite.setBounceOnWall(true)
 }
-scene.onHitWall(SpriteKind.Ball, function (sprite, location) {
-    if (sprite.x > 80) {
-        info.player2.changeScoreBy(1)
-    } else {
-        game.gameOver(true)
-    }
-})
 sprites.onOverlap(SpriteKind.Red, SpriteKind.Ball, function (sprite, otherSprite) {
+    otherSprite.vx = otherSprite.vx * -1
+    pause(500)
+})
+sprites.onOverlap(SpriteKind.blueGoal, SpriteKind.Ball, function (sprite, otherSprite) {
+    info.player1.changeScoreBy(1)
     otherSprite.vx = otherSprite.vx * -1
     pause(500)
 })
@@ -42,7 +47,8 @@ sprites.onOverlap(SpriteKind.Blue, SpriteKind.Ball, function (sprite, otherSprit
     pause(500)
 })
 let ballSprite: Sprite = null
-tiles.setCurrentTilemap(tilemap`level1`)
+info.player1.setScore(0)
+info.player2.setScore(0)
 // STEP 1 Background
 scene.setBackgroundImage(img`
     7777777777777777777777777777777777777777777777777777777777777777777777777777777111777777777777777777777777777777777777777777777777777777777777777777777777777777
@@ -239,7 +245,250 @@ let redPaddle = sprites.create(img`
 redPaddle.setPosition(152, 60)
 redPaddle.setVelocity(0, 50)
 redPaddle.setBounceOnWall(true)
+let redGoal = sprites.create(img`
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    `, SpriteKind.redGoal)
+redGoal.x = 0
+let blueGoal = sprites.create(img`
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    1111
+    `, SpriteKind.blueGoal)
+blueGoal.x = 160
 createBall()
-forever(function () {
-    info.setScore(ballSprite.x)
-})
